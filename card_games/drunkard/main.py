@@ -19,7 +19,6 @@ class Cards:
         13: 'Король',
         14: 'Туз',
     }
-
     def __init__(self, name: str):
         """Создание колоды карт и распределение по игрокам"""
         self.name = name
@@ -31,53 +30,48 @@ class Cards:
     def play(self):
         r = 0
         while True:
-            r +=  1
-            print(r, f'колода {self.name}:', len(self.players_deck), 'колода опонента:', len(self.opponents_deck))
-            let = []
-            player, opponent = self.players_deck.pop(), self.opponents_deck.pop()
-            print(f'*** {self.name}', self.suits[player[0]], self.values[player[1]], '***  VS  *** Opponent',
-                  self.suits[opponent[0]], self.values[opponent[1]], '***')
-            if (player[1] > opponent[1]) or (player[1] == 6 and opponent[1] == 14):
-                self.players_deck.appendleft(player)
-                self.players_deck.appendleft(opponent)
-            elif (player[1] < opponent[1]) or (player[1] == 14 and opponent[1] == 6):
-                self.opponents_deck.appendleft(player)
-                self.opponents_deck.appendleft(opponent)
-            else:
-                while player[1] == opponent[1]:
-                    if len(self.players_deck) >= 2 and len(self.opponents_deck) >= 2:
-                        print('УВАУ!! Индентичные карты! ложим по одной сверху')
-                        let.extend([player, opponent, self.players_deck.pop(), self.opponents_deck.pop()])
-                    elif len(self.players_deck) == 1 and len(self.opponents_deck) == 1:
-                        print('УВАУ!!кто-то на грани поражения')
-                        let.extend([player, opponent])
-                    else:
-                        if len(self.players_deck) == 0:
-                            print('Вы проиграли!')
-                            break
-                        elif len(self.opponents_deck) == 0:
-                            print('Вы выиграли!')
-                            break
-                    player = self.players_deck.pop()
-                    opponent = self.opponents_deck.pop()
-                    print(f'*** {self.name}', self.suits[player[0]], self.values[player[1]], '***  VS  *** Opponent',
-                            self.suits[opponent[0]], self.values[opponent[1]], '***')
-                    if player[1] > opponent[1]:
-                        self.players_deck.appendleft(player)
-                        self.players_deck.appendleft(opponent)
-                        self.players_deck.extendleft(let)
-                    elif player[1] < opponent[1]:
-                        self.opponents_deck.appendleft(player)
-                        self.opponents_deck.appendleft(opponent)
-                        self.opponents_deck.extendleft(let)
-            print()
             if len(self.players_deck) == 0:
                 print('Вы проиграли!')
                 break
             elif len(self.opponents_deck) == 0:
                 print('Вы выиграли!')
                 break
+            else:
+                r += 1
+                print(r, f'колода {self.name}:', len(self.players_deck), 'колода опонента:', len(self.opponents_deck))
+                let = []
+                player, opponent = self.players_deck.pop(), self.opponents_deck.pop()
+                print(f'*** {self.name}', self.suits[player[0]], self.values[player[1]], '***  VS  *** Opponent',
+                      self.suits[opponent[0]], self.values[opponent[1]], '***')
+                if (player[1] > opponent[1]) or (player[1] == 6 and opponent[1] == 14):
+                    self.players_deck.appendleft(player)
+                    self.players_deck.appendleft(opponent)
+                elif (player[1] < opponent[1]) or (player[1] == 14 and opponent[1] == 6):
+                    self.opponents_deck.appendleft(player)
+                    self.opponents_deck.appendleft(opponent)
+                else:
+                    while player[1] == opponent[1]:
+                        if len(self.players_deck) >= 2 and len(self.opponents_deck) >= 2:
+                            print('УВАУ!! Индентичные карты! ложим по одной сверху')
+                            let.extend([player, opponent, self.players_deck.pop(), self.opponents_deck.pop()])
+                        elif len(self.players_deck) == 1 and len(self.opponents_deck) == 1:
+                            print('УВАУ!!кто-то на грани поражения')
+                            let.extend([player, opponent])
+                        if len(self.players_deck) != 0 and len(self.opponents_deck) != 0:
+                            player = self.players_deck.pop()
+                            opponent = self.opponents_deck.pop()
+                            print(f'*** {self.name}', self.suits[player[0]], self.values[player[1]], '***  VS  *** Opponent',
+                                    self.suits[opponent[0]], self.values[opponent[1]], '***')
+                            if player[1] > opponent[1]:
+                                self.players_deck.appendleft(player)
+                                self.players_deck.appendleft(opponent)
+                                self.players_deck.extendleft(let)
+                            elif player[1] < opponent[1]:
+                                self.opponents_deck.appendleft(player)
+                                self.opponents_deck.appendleft(opponent)
+                                self.opponents_deck.extendleft(let)
+            print()
+
 
 if __name__ == '__main__':
     Cards('DD').play()
-
