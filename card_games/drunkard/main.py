@@ -1,5 +1,6 @@
 import random
 from collections import deque
+import copy
 
 class Cards:
     suits = {
@@ -53,10 +54,10 @@ class Cards:
                     while player[1] == opponent[1]:
                         if len(self.players_deck) >= 2 and len(self.opponents_deck) >= 2:
                             print('УВАУ!! Индентичные карты! ложим по одной сверху')
-                            let.extend([player, opponent, self.players_deck.pop(), self.opponents_deck.pop()])
+                            let.extend([copy.copy(player), copy.copy(opponent), self.players_deck.pop(), self.opponents_deck.pop()])
                         elif len(self.players_deck) == 1 and len(self.opponents_deck) == 1:
                             print('УВАУ!!кто-то на грани поражения')
-                            let.extend([player, opponent])
+                            let.extend([copy.copy(player), copy.copy(opponent)])
                         if len(self.players_deck) != 0 and len(self.opponents_deck) != 0:
                             player = self.players_deck.pop()
                             opponent = self.opponents_deck.pop()
@@ -72,6 +73,6 @@ class Cards:
                                 self.opponents_deck.extendleft(let)
             print()
 
-
 if __name__ == '__main__':
     Cards('DD').play()
+
