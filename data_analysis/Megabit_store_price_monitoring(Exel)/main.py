@@ -13,7 +13,6 @@ def Analysis(name_file: str, name_new_file: str):
         4: 'Цена розница',
         8: 'Цена алмазная карта',
         9: 'Скидка'
-
     }
     wb_new = openpyxl.Workbook()
     ws_new = wb_new.active
@@ -36,7 +35,6 @@ def Analysis(name_file: str, name_new_file: str):
             if disc > max_disc:
                 max = [name, part_numb, article, price, disc_price, disc]
                 max_disc = disc
-
         else:
             if max:
                 ws_new.cell(row=rows, column=1).value, ws_new.cell(row=rows, column=2).value, ws_new.cell(row=rows, column=3).value,\
