@@ -22,7 +22,6 @@ def GetOkeyPrice(town: str):
     time_for_file = datetime.datetime.now().date()
     browser = webdriver.Chrome()
 
-
     def GetCategory(browser):
         '''
         Не посредственно получает ссылки и названия категорий для анализа цен в виде списка
@@ -46,7 +45,6 @@ def GetOkeyPrice(town: str):
             categories_list.append([name_category, href])
         logging.info(f'End GetCategory()')
         return categories_list
-
 
     def Get_prices(browser, href):
         '''
@@ -95,7 +93,6 @@ def GetOkeyPrice(town: str):
         logging.info(f'items= : {len(elems)}')
         return all_prices_subcategory
 
-
     def Subcategory(browser, categories_list: str):
         re_find_href = r'(href=\"[/spb/](\S*)\")'
         re_find_name_category = r'(([А-Яа-я]+(\s{1}|([,]\s{1})))+[А-Яа-я]+)|[А-Яа-я]+'
@@ -123,12 +120,11 @@ def GetOkeyPrice(town: str):
                 category_prices[name_category] = all_subcategory_prices
         with open(f"{str(time_for_file)}.py", "w", encoding='utf-8') as write_file:
             write_file.write('cats = ' + pprint.pformat(category_prices) + '\n')
-
     list_ = GetCategory(browser)
     Subcategory(browser, list_)
     logging.info(f'End GetOkeyPrice{town}')
 
-
+    
 if __name__ == '__main__':
     logging.info('Start programm')
     GetOkeyPrice('spb')
