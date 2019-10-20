@@ -13,3 +13,4 @@
   * [Программирование на Python](https://stepik.org/cert/216462)
   * [Python: основы и применение](https://stepik.org/cert/215539)
   * [Веб-разработка для начинающих: HTML и CSS](https://stepik.org/cert/226481)
+  * [Автоматизация тестирования с помощью Selenium и Python](https://stepik.org/cert/230964)
